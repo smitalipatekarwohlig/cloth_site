@@ -1,13 +1,6 @@
 const mongoose = require('mongoose')
-const {Schema} = mongoose
 
-mongoose.connect("mongodb://localhost:27017/ClothSite").then(()=>{
-    console.log("Clothing Site...");
-}).catch((err)=>{
-    console.log(err);
-})
-
-const customerSchema= new mongoose.Schema({
+const customerSchema=  mongoose.Schema({
         name : {
             type: String,
             required: true

@@ -1,12 +1,6 @@
-const mongoose = require("mongoose");
-const {Customer} = require('./export')
+const Customer = require('../models/customerSchema')
 const Ajv = require('ajv')
 
-mongoose.connect("mongodb://localhost:27017/ClothSite").then(()=>{
-    console.log("Clothing Site...");
-}).catch((err)=>{
-    console.log(err);
-})
 
 const getCustomer= async(req,res)=>{
     try {
@@ -40,17 +34,30 @@ const createCustomer= async(req,res)=>{
         required: ['name','gender','mobileNo','email','address'],
         additionalProperties: true
     }
-
-    const validate= ajv.addSchema(customerSchema).compile(customerSchema)
-    const valid =  validate(req.body)
+    
+    const ajv = new Ajv()
+    try {
+        const validate= ajv.addSchema(customerSchema).compile(customerSchema)
+        const valid =  validate(req.body)
     if(!valid){
         console.log(validate.errors);
     }
+    } catch (err) {
+        console.log(err);
+    }
 
-    const data = req.body
-    console.log(data);
-    const result = await Customer.insertMany(data)
-    console.log(result);
+    const data =req.body
+    console.log(data,' ',"Customer",Customer);
+    const result = await Customer.create(data)
+    console.log("result----",result)
+}
+
+const updateCustomer= async(req,res)=>{
+    try {
+        
+    } catch (err) {
+        console.log(err);
+    }
 }
 
 module.exports = {getCustomer,createCustomer}

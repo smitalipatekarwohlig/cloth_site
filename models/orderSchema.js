@@ -1,11 +1,11 @@
 const mongoose = require('mongoose')
 const {Schema} = mongoose
 
-mongoose.connect("mongodb://localhost:27017/ClothSite").then(()=>{
-    console.log("Clothing Site...");
-}).catch((err)=>{
-    console.log(err);
-})
+// mongoose.connect("mongodb://localhost:27017/ClothSite").then(()=>{
+//     console.log("Clothing Site...");
+// }).catch((err)=>{
+//     console.log(err);
+// })
 
 const orderSchema= new mongoose.Schema({
     orderId: {
