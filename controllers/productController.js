@@ -57,7 +57,7 @@ const createProducts= async(req,res)=>{
     const data = req.body
     console.log(data,' ','Product',Product);
     const result= await Product.insertMany(data)
-    console.log('ressult--',result);
+    console.log('result--',result);
 }
 
 const updateProducts= async(req,res)=>{
@@ -71,4 +71,15 @@ const updateProducts= async(req,res)=>{
     }
 }
 
-module.exports= {getProducts,createProducts,updateProducts}
+const deleteProducts= async(req,res)=>{
+    try {
+        const data= req.body._id
+        console.log(data,' ','Product',Product);
+        const result= await Product.deleteOne({_id: data})
+        console.log('result',result);
+    } catch (err) {
+        console.log(err);
+    }
+}
+
+module.exports= {getProducts,createProducts,updateProducts,deleteProducts}

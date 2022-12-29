@@ -3,7 +3,7 @@ const router = express.Router()
 
 
 const {getCustomer,createCustomer,updateCustomer,deleteCustomer}= require('../controllers/customerController')
-const {getProducts,createProducts,updateProducts}= require('../controllers/productController')
+const {getProducts,createProducts,updateProducts,deleteProducts}= require('../controllers/productController')
 
 router.route('/getCustomer').get(getCustomer)
 router.route('/createCustomer').post(createCustomer)
@@ -13,5 +13,6 @@ router.route('/deleteCustomer').delete(deleteCustomer)
 router.route('/getProducts').get(getProducts)
 router.route('/createProducts').post(createProducts)
 router.route('./updateProducts').put(updateProducts)
+router.route('./deleteProducts').delete(deleteProducts)
 
-module.exports= router
+module.exports= router 
