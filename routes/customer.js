@@ -12,7 +12,7 @@ router.route('/deleteCustomer').delete(deleteCustomer)
 
 router.route('/getProducts').get(getProducts)
 router.route('/createProducts').post(createProducts)
-router.route('./updateProducts').put(updateProducts)
-router.route('./deleteProducts').delete(deleteProducts)
+router.route('/updateProducts').put(updateProducts)
+router.route('/deleteProducts').delete(deleteProducts)
 
 module.exports= router 

@@ -69,6 +69,7 @@ const updateProducts= async(req,res)=>{
     }catch (err) {
         console.log(err);
     }
+
 }
 
 const deleteProducts= async(req,res)=>{
