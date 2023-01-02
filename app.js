@@ -13,7 +13,6 @@ app.use(express.json())
 
 app.use(Router)
 
-
 app.listen(3000,()=>{
     console.log('Listening to the port 3000');
 })

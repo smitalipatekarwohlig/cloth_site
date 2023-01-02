@@ -56,7 +56,7 @@ const updateCustomer= async(req,res)=>{
     try {
         const data = req.body
         console.log(data,' ',"Customer",Customer);
-        const result = await Customer.findByIdAndUpdate({_id:data._id},data,{new : true,mobileNo: 54321})
+        const result = await Customer.findByIdAndUpdate({_id:data._id},data)
         console.log("result--",result);
     } catch (err) {
         console.log(err);
