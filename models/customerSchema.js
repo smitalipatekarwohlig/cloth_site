@@ -27,8 +27,8 @@ const customerSchema = mongoose.Schema({
         throw new Error('Invalid Email')
       }
     },
-    unique: true,
-    required: true
+    required: true,
+    unique: true
   },
   address: {
     type: String,

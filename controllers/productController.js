@@ -4,7 +4,6 @@ const Ajv = require('ajv')
 const getProducts = async (req, res) => {
   try {
     const result = await Product.find()
-    console.log(result)
     res.status(200).json(result)
   } catch (err) {
     console.log(err)
@@ -14,31 +13,31 @@ const getProducts = async (req, res) => {
 
 const createProducts = async (req, res) => {
   const productSchema = {
-    type: 'array',
+    type: 'object',
     properties: {
       category: {
-        type: String
+        type: 'string'
       },
       productName: {
-        type: String
+        type: 'string'
       },
       brand: {
-        type: String
+        type: 'string'
       },
       size: {
-        type: String
+        type: 'string'
       },
       colours: {
-        type: String
+        type: 'string'
       },
       qty: {
-        type: Number
+        type: 'number'
       },
       amount: {
-        type: Number
+        type: 'number'
       },
       description: {
-        type: String
+        type: 'string'
       }
     },
     required: ['category', 'productName', 'brand', 'size', 'colours', 'qty', 'amount', 'description'],
@@ -55,11 +54,11 @@ const createProducts = async (req, res) => {
     const data = req.body
     console.log(data, ' ', 'Product', Product)
     const result = await Product.insertMany(data)
-    console.log('result--', result)
-    res.status(200).json(result)
+    console.log('result', result)
+    res.status(200).send('Products has been created successfully')
   } catch (err) {
-    console.log(err)
-    res.status(500).json(err)
+    console.log(err.message)
+    res.status(500).json(err.message)
   }
 }
 
@@ -67,12 +66,12 @@ const updateProducts = async (req, res) => {
   try {
     const data = req.body
     console.log(data, ' ', 'Product', Product)
-    const result = await Product.findOneAndUpdate({ _id: data._id }, data, { new: true })
-    console.log('result--', result)
-    res.status(200).json(result)
+    const result = await Product.updateOne({ _id: data._id }, data, { new: true })
+    console.log('result', result)
+    res.status(200).send('Product has been updated successfully')
   } catch (err) {
-    console.log(err)
-    res.status(500).json(err)
+    console.log(err.message)
+    res.status(500).json(err.message)
   }
 }
 
@@ -82,10 +81,10 @@ const deleteProducts = async (req, res) => {
     console.log(data, ' ', 'Product', Product)
     const result = await Product.deleteOne({ _id: data })
     console.log('result', result)
-    res.status(200).json(result)
+    res.status(200).send('Product has been deleted successfully')
   } catch (err) {
-    console.log(err)
-    res.status(500).json(err)
+    console.log(err.message)
+    res.status(500).json(err.message)
   }
 }
 

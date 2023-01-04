@@ -1,10 +1,9 @@
 const mongoose = require('mongoose')
-const { Schema } = mongoose
 
 const productSchema = new mongoose.Schema({
   category: {
     type: String,
-    enum: ['Men','Women','Girl','Boy']
+    enum: ['Men', 'Women', 'Girl', 'Boy']
   },
   productName: {
     type: String,

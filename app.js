@@ -1,9 +1,11 @@
 const mongoose = require('mongoose')
+const dotenv = require('dotenv').config()
 const express = require('express')
 const app = express()
+const PORT = process.env.PORT
 
-mongoose.connect('mongodb://localhost:27017/ClothSite').then(() => {
-  console.log('Clothing Site...')
+mongoose.connect(process.env.DATABASE_URL).then(() => {
+  console.log('DB connected successfully...')
 }).catch((err) => {
   console.log(err)
 })
@@ -13,6 +15,6 @@ app.use(express.json())
 
 app.use(Router)
 
-app.listen(3000, () => {
-  console.log('Listening to the port 3000')
+app.listen(PORT, () => {
+  console.log(`Listening to the port  ${PORT}`)
 })
