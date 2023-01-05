@@ -8,7 +8,7 @@ const getProducts = async (req, res) => {
   } catch (err) {
     console.log(err)
 
-    res.status(500).send({ success: false, msg: err.message })
+    res.status(500).json( err.message)
   }
 }
 
@@ -59,7 +59,7 @@ const createProducts = async (req, res) => {
     res.status(200).send('Products has been created successfully')
   } catch (err) {
     console.log(err.message)
-    res.status(500).send({ success: false, msg: err.message })
+    res.status(500).json( err.message )
   }
 }
 
@@ -72,7 +72,7 @@ const updateProducts = async (req, res) => {
     res.status(200).send('Product has been updated successfully')
   } catch (err) {
     console.log(err.message)
-    res.status(500).send({ success: false, msg: err.message })
+    res.status(500).json( err.message )
   }
 }
 
@@ -85,7 +85,7 @@ const deleteProducts = async (req, res) => {
     res.status(200).send('Product has been deleted successfully')
   } catch (err) {
     console.log(err.message)
-    res.status(500).send({ success: false, msg: err.message })
+    res.status(500).json( err.message )
   }
 }
 

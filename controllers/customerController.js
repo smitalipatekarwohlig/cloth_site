@@ -4,10 +4,11 @@ const Ajv = require('ajv')
 const getCustomer = async (req, res) => {
   try {
     const result = await Customer.find()
+    console.log('result', result)
     res.status(200).json(result)
   } catch (err) {
     console.log(err)
-    res.status(500).send({ success: false, msg: err.message })
+    res.status(500).json(err.message)
   }
 }
 
@@ -50,7 +51,7 @@ const createCustomer = async (req, res) => {
     }
   } catch (err) {
     console.log(err.message)
-    res.status(500).send({ success: false, msg: err.message })
+    res.status(500).json(err.message)
   }
 }
 
@@ -63,7 +64,7 @@ const updateCustomer = async (req, res) => {
     res.status(200).send('Customer has been updated successfully')
   } catch (err) {
     console.log(err.message)
-    res.status(500).send({ success: false, msg: err.message })
+    res.status(500).json(err.message)
   }
 }
 
@@ -76,7 +77,7 @@ const deleteCustomer = async (req, res) => {
     res.status(200).send('Customer has been deleted successfully')
   } catch (err) {
     console.log(err.message)
-    res.status(500).send({ success: false, msg: err.message })
+    res.status(500).json(err.message)
   }
 }
 
