@@ -2,6 +2,7 @@ const mongoose = require('mongoose')
 const dotenv = require('dotenv').config()
 const express = require('express')
 const app = express()
+const Router = require('./routes/customer')
 const PORT = process.env.PORT
 
 mongoose.connect(process.env.DATABASE_URL).then(() => {
@@ -10,7 +11,6 @@ mongoose.connect(process.env.DATABASE_URL).then(() => {
   console.log(err)
 })
 
-const Router = require('./routes/customer')
 app.use(express.json())
 
 app.use(Router)
