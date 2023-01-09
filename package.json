@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "standard && node my-tests.js"
+    "test": "standard && node my-tests.js",
+    "standard --fix" : true
   },
   "author": "Smitali",
   "license": "ISC",
@@ -18,7 +19,6 @@
     "validator": "^13.7.0"
   },
   "devDependencies": {
-    "eslint": "^8.31.0",
     "standard": "^17.0.0"
   }
 }

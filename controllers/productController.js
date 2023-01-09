@@ -1,4 +1,5 @@
 const Product = require('../models/productSchema')
+const { json } = require('express')
 const Ajv = require('ajv')
 
 const getProducts = async (req, res) => {
@@ -8,7 +9,7 @@ const getProducts = async (req, res) => {
   } catch (err) {
     console.log(err)
 
-    res.status(500).json( err.message)
+    res.status(500).json(err.message)
   }
 }
 
@@ -45,21 +46,22 @@ const createProducts = async (req, res) => {
     additionalProperties: true
   }
 
-  const ajv = new Ajv()
+  const JSON = new Ajv()
   try {
-    const validate = ajv.addSchema(productSchema).compile(productSchema)
+    const validate = JSON.addSchema(productSchema).compile(productSchema)
     const valid = validate(req.body)
     if (!valid) {
       console.log(validate.errors)
+    } else {
+      const data = req.body
+      console.log(data, ' ', 'Product', Product)
+      const result = await Product.insertMany(data)
+      console.log('result', result)
+      res.status(200).send('Products has been created successfully')
     }
-    const data = req.body
-    console.log(data, ' ', 'Product', Product)
-    const result = await Product.insertMany(data)
-    console.log('result', result)
-    res.status(200).send('Products has been created successfully')
   } catch (err) {
     console.log(err.message)
-    res.status(500).json( err.message )
+    res.status(500).json(err.message)
   }
 }
 
@@ -72,7 +74,7 @@ const updateProducts = async (req, res) => {
     res.status(200).send('Product has been updated successfully')
   } catch (err) {
     console.log(err.message)
-    res.status(500).json( err.message )
+    res.status(500).json(err.message)
   }
 }
 
@@ -85,7 +87,7 @@ const deleteProducts = async (req, res) => {
     res.status(200).send('Product has been deleted successfully')
   } catch (err) {
     console.log(err.message)
-    res.status(500).json( err.message )
+    res.status(500).json(err.message)
   }
 }
 

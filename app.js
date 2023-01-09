@@ -15,6 +15,13 @@ app.use(express.json())
 
 app.use(Router)
 
+function addUniqueId(req,res,next) {
+  req.header = '643423'
+  next()
+}
+
+app.use(addUniqueId)
+
 app.listen(PORT, () => {
   console.log(`Listening to the port  ${PORT}`)
 })
