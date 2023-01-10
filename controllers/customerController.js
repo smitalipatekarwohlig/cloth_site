@@ -117,7 +117,7 @@ const updateCustomer = async (req, res) => {
   }
 }
 
-const deleteCustomer = async(req, res) => {
+const deleteCustomer = async (req, res) => {
   try {
     const data = req.body._id
     if (!data) {
