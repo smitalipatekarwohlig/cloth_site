@@ -4,8 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "standard && node my-tests.js",
-    "run": "standard --fix"
+    "test": "standard && node my-tests.js"
   },
   "author": "Smitali",
   "license": "ISC",

@@ -17,7 +17,7 @@ const getCustomer = async (req, res) => {
 
 const createCustomer = async (req, res) => {
   const customerSchema = {
-    "$id": "http://example.com/customerSchema.json",
+    "$id": "/customerSchema",
     "type": "object",
     "required": [
       "name",
@@ -66,7 +66,7 @@ const createCustomer = async (req, res) => {
 
 const updateCustomer = async (req, res) => {
   const updateCustSchema = {
-    "$id": "http://example.com/updateCustSchema.json",
+    "$id": "/updateCustomerSchema",
     "type": "object",
     "required": [
       "name",
@@ -82,9 +82,6 @@ const updateCustomer = async (req, res) => {
       },
       "gender": {
         "type": "string"
-      },
-      "mobileNo": {
-        "type": "integer"
       },
       "email": {
         "type": "string"
@@ -102,11 +99,11 @@ const updateCustomer = async (req, res) => {
     } else {
       const data = req.body
       console.log(data, ' ', 'Customer', Customer);
-      await Customer.findById({ _id: data._id })
-      if (!data._id) {
-        res.status(400).send(err.message('Id is not valid'))
+      const customer = await Customer.findById({ _id: data._id })
+      if (!customer) {
+        throw new Error('ID not found')
       } else {
-        const result = await Customer.updateOne({ _id: data._id }, data, { new: true })
+        const result = await Customer.updateOne(customer, { new: true })
         console.log('result', result)
         res.status(200).send('Customer has been updated successfully')
       }
@@ -119,12 +116,13 @@ const updateCustomer = async (req, res) => {
 
 const deleteCustomer = async (req, res) => {
   try {
-    const data = req.body._id
-    if (!data) {
-      res.status(400).send('Customer not found')
+    const data = req.body
+    console.log(data, ' ', 'Customer', Customer)
+    const customer = await Customer.findById({ _id: data._id })
+    if (!customer) {
+      throw new Error('Customer not found')
     } else {
-      console.log(data, ' ', 'Customer', Customer)
-      const result = await Customer.deleteOne({ _id: data })
+      const result = await Customer.deleteOne(customer)
       console.log('result', result)
       res.status(200).send('Customer has been deleted successfully')
     }

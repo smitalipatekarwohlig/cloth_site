@@ -16,7 +16,7 @@ const getProducts = async (req, res) => {
 
 const createProducts = async (req, res) => {
   const createProdSchema = {
-    "$id": "http://example.com/createProdSchema.json",
+    "$id": "/createProdSchema",
     "type": "array",
     "required": [
       "category",
@@ -77,7 +77,7 @@ const createProducts = async (req, res) => {
 
 const updateProducts = async (req, res) => {
   const updateProdSchema = {
-    "$id": "http://example.com/updateProdSchema.json",
+    "$id": "/updateProdSchema",
     "type": "object",
     "required": [
       "category",
@@ -125,11 +125,13 @@ const updateProducts = async (req, res) => {
     } else {
       const data = req.body
       console.log(data, ' ', 'Product', Product);
-      await Product.findOne({ _id: data._id }, data, { new: true })
-      if (!data._id) {
-        res.status(400).json('Id is not valid')
+      const product = await Product.findOne({ _id: data._id }, data, { new: true })
+      if (!product) {
+        console.log(123)
+        throw new Error('Id is not valid')
+
       } else {
-        const result = await Product.updateOne({ _id: data._id }, data, { new: true })
+        const result = await Product.updateOne(product)
         console.log('result', result);
         res.status(200).send('Product has been updated successfully')
       }
@@ -142,12 +144,13 @@ const updateProducts = async (req, res) => {
 
 const deleteProducts = async (req, res) => {
   try {
-    const data = req.body._id
-    if (!data) {
-      res.status(400).send('Product not found')
+    const data = req.body
+    console.log(data, ' ', 'Product', Product);
+    const product = await Product.findOne({ _id: data._id })
+    if (!product) {
+      throw new Error('Product not found')
     } else {
-      console.log(data, ' ', 'Product', Product)
-      const result = await Product.deleteOne({ _id: data })
+      const result = await Product.deleteOne(product)
       console.log('result', result)
       res.status(200).send('Product has been deleted successfully')
     }
